@@ -7,7 +7,7 @@ public class Program
         int sizeX = 500;
         int sizeY = 500;
         GameFrame frame = new GameFrame(sizeX, sizeY);
-        ObjParser parser = new ObjParser(new File("Human.obj"));
+        ObjParser parser = new ObjParser(new File("Heart.obj"));
         DrawPanel panel = new DrawPanel(sizeX, sizeY, new EdgesDrawer(parser.faces(), sizeX, sizeY));
         frame.add(panel);
         frame.setVisible(true);

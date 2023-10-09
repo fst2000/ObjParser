@@ -7,34 +7,40 @@ public class EdgesDrawer implements Drawer
     ArrayList<Face> faces;
     int sizeX;
     int sizeY;
+    int centerX;
+    int centerY;
+    int drawSize;
     public EdgesDrawer(ArrayList<Face> faces, int sizeX, int sizeY)
     {
         this.faces = faces;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        centerX = sizeX / 2;
+        centerY = sizeY / 4;
+        drawSize = (sizeX + sizeY) / 4;
     }
     public void draw(Graphics g)
     {
-        int centerX = sizeX / 2;
-        int centerY = sizeY / 4;
-        int size = (sizeX + sizeY) / 8;
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, sizeX, sizeY);
         g.setColor(Color.YELLOW);
-        for(int i = 0; i < faces.size() - 1; i++)
+        for(int i = 0; i < faces.size(); i++)
         {
             ArrayList<Vertex> verts = faces.get(i).vertices();
             for(int j = 0; j < verts.size() - 1; j++)
             {
-                Vector3 pos = verts.get(j).position();
-                Vector3 nextPos = verts.get(j + 1).position();
-                g.drawLine(
-                    centerX + (int)(pos.x * size),
-                    sizeY - (centerY + (int)(pos.z * size)),
-                    centerX + (int)(nextPos.x * size),
-                    sizeY - (centerY + (int)(nextPos.z * size)));
+                drawLine(g, verts.get(j).position(), verts.get(j + 1).position());
             }
+            drawLine(g, verts.get(verts.size() - 1).position(), verts.get(0).position());
         }
         System.out.println(faces.size());
-    }    
+    }
+    private void drawLine(Graphics g, Vector3 start, Vector3 end)
+    {
+                g.drawLine(
+                    centerX + (int)(start.x * drawSize),
+                    sizeY - (centerY + (int)(start.z * drawSize)),
+                    centerX + (int)(end.x * drawSize),
+                    sizeY - (centerY + (int)(end.z * drawSize)));
+    }
 }
