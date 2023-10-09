@@ -63,9 +63,9 @@ public class ObjParser
                         uv.get(Integer.parseInt(indexes[1]) - 1),
                         normals.get(Integer.parseInt(indexes[2]) - 1)));
                 }
+                faces.add(new Face(faceVertices));
             }
         }
-        System.out.print(points.size());
         return faces;
     }
 }

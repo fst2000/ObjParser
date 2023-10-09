@@ -1,11 +1,13 @@
+import java.util.ArrayList;
+
 public class Face
 {
-    Vertex[] vertices;
-    public Face(Vertex[] vertices)
+    ArrayList<Vertex> vertices;
+    public Face(ArrayList<Vertex> vertices)
     {
         this.vertices = vertices;
     }
-    Vertex[] vertices()
+    ArrayList<Vertex> vertices()
     {
         return vertices;
     }
