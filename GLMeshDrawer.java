@@ -19,16 +19,29 @@ public class GLMeshDrawer implements Drawer
         glDepthFunc(GL_LESS);
         glEnable(GL_DEPTH_TEST);
         glViewport(0, 0, sizeX, sizeY);
-        glColor3f(0.5f, 1f, 0.5f);
+        
+        glBegin(GL_TRIANGLES);
         for (Face face : faces)
         {
-            glBegin(GL_POLYGON);
+            Vector3 p1 = face.vertices().get(0).position();
+            Vector3 p2 = face.vertices().get(1).position();
+            Vector3 p3 = face.vertices().get(2).position();
+
+            float color = Vector3.dot(
+                new Vector3(0, 0, -1),
+                Vector3.normalize(
+                    Vector3.cross(
+                        Vector3.sum(Vector3.inverse(p1), p2),
+                        Vector3.sum(Vector3.inverse(p1), p3))));
+
+            glColor3f(color, color, color);
+
             for (var vert : face.vertices)
             {
                 Vector3 pos = vert.position();
                 glVertex3f(pos.x, pos.y, pos.z);
             }
-            glEnd();
         }
+        glEnd();
     }
 }

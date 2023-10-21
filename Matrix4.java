@@ -1,16 +1,11 @@
 public class Matrix4
 {
-    float[] m;
-    public Matrix4(float[] m)
+    float[][] m = new float[4][4];
+    public Matrix4()
     {
-        this.m = m;
-    }
-    float get(int i, int j)
-    {
-        return m[4 * i + j];
-    }
-    void set(int i, int j, float value)
-    {
-        m[4 * i + j] = value;
+        for(int i = 0; i < 4; i++)
+        {
+            m[i][i] = 1;
+        }
     }
 }
