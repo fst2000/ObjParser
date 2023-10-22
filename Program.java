@@ -6,8 +6,7 @@ public class Program
     {
         int sizeX = 500;
         int sizeY = 500;
-        GameFrame frame = new GameFrame(sizeX, sizeY);
-        ObjParser parser = new ObjParser(new File("Heart.obj"));
+        ObjParser parser = new ObjParser(new File("Knight.obj"));
 		new GLWindow(sizeX, sizeY, new GLMeshDrawer(parser.faces(), sizeX, sizeY)).run();
     }
 }

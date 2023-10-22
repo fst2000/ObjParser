@@ -6,6 +6,8 @@ public class GLMeshDrawer implements Drawer
     ArrayList<Face> faces;
     int sizeX;
     int sizeY;
+    Matrix4 rotYMatrix = new Matrix4();
+    float angle;
     public GLMeshDrawer(ArrayList<Face> faces, int sizeX, int sizeY)
     {
         this.faces = faces;
@@ -38,8 +40,11 @@ public class GLMeshDrawer implements Drawer
 
             for (var vert : face.vertices)
             {
+                rotYMatrix.rotateY(angle);
+                angle += 0.001f;
                 Vector3 pos = vert.position();
-                glVertex3f(pos.x, pos.y, pos.z);
+                Vector3 rPos = rotYMatrix.mul(pos);
+                glVertex3f(rPos.x, rPos.y, rPos.z);
             }
         }
         glEnd();
