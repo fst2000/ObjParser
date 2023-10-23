@@ -16,12 +16,6 @@ public class Matrix4
         set(0, 2, sin);
         set(2, 0, -sin);
         set(2, 2, cos);
-
-        for(int i = 0; i < 3; i++)
-        {
-            System.out.print(getColumn(i).length() + " ");
-        }
-        System.out.println();
     }
     private float get(int i, int j)
     {
@@ -43,7 +37,7 @@ public class Matrix4
         {
             for(int j = 0; j < 4; j++)
             {
-                result[i] += get(i,j) * v4[i];
+                result[i] += get(i,j) * v4[j];
             }
         }
         return new Vector3(result[0], result[1], result[2]);
