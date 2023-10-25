@@ -8,11 +8,11 @@ import java.io.File;
 import java.io.IOException;
 import static org.lwjgl.opengl.GL11.*;
 
-public class Texture
+public class GLTexture
 {
     private ByteBuffer buffer;
     private int id;
-    public Texture(File imageFile)
+    public GLTexture(File imageFile)
     {
         id = glGenTextures();
         BufferedImage image;
