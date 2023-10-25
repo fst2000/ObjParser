@@ -17,6 +17,12 @@ public class Matrix4
         set(2, 0, -sin);
         set(2, 2, cos);
     }
+    void translate(Vector3 v)
+    {
+        set(0, 3, v.x);
+        set(1, 3, v.y);
+        set(2, 3, v.z);
+    }
     private float get(int i, int j)
     {
         return m[i * 4 + j];

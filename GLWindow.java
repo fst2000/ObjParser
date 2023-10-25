@@ -116,7 +116,7 @@ public class GLWindow
 		// the window or has pressed the ESCAPE key.
 		while ( !glfwWindowShouldClose(window) ) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-
+			
 			drawer.draw();
 
 			glfwSwapBuffers(window); // swap the color buffers

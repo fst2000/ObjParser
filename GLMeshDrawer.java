@@ -1,4 +1,11 @@
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.io.File;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class GLMeshDrawer implements Drawer
@@ -6,13 +13,14 @@ public class GLMeshDrawer implements Drawer
     ArrayList<Face> faces;
     int sizeX;
     int sizeY;
-    Matrix4 rotYMatrix = new Matrix4();
+    Matrix4 transform;
     float angle;
-    public GLMeshDrawer(ArrayList<Face> faces, int sizeX, int sizeY)
+    public GLMeshDrawer(ArrayList<Face> faces, String texture, int sizeX, int sizeY, Matrix4 transform)
     {
         this.faces = faces;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        this.transform = transform;
     }
     @Override
     public void draw()
@@ -20,11 +28,13 @@ public class GLMeshDrawer implements Drawer
         glCullFace(GL_NONE);
         glDepthFunc(GL_LESS);
         glEnable(GL_DEPTH_TEST);
+        glEnable(GL_TEXTURE_2D);
+
         glViewport(0, 0, sizeX, sizeY);
         
         glBegin(GL_TRIANGLES);
 
-        rotYMatrix.rotateY(angle);
+        transform.rotateY(angle);
         angle += 0.5f;
 
         for (Face face : faces)
@@ -39,12 +49,15 @@ public class GLMeshDrawer implements Drawer
 
             for (var vert : face.vertices)
             {
-                Vector3 rNormal = rotYMatrix.mul(normal);
+                Vector3 rNormal = transform.mul(normal);
                 float faceBrightness = Vector3.dot(rNormal, new Vector3(0, 0, -1));
                 glColor3f(faceBrightness, faceBrightness, faceBrightness);
                 Vector3 pos = vert.position();
-                Vector3 rPos = rotYMatrix.mul(pos);
-                glVertex3f(rPos.x, rPos.y, rPos.z);
+                pos = transform.mul(pos);
+                Vector2 uv = vert.uv();
+
+                glTexCoord2f(uv.x, uv.y);
+                glVertex3f(pos.x, pos.y, pos.z);
             }
         }
         glEnd();

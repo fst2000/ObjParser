@@ -1,0 +1,79 @@
+# Blender MTL File: 'None'
+# Material Count: 7
+
+newmtl Head
+Ns 519.080558
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd D:\\Blender Ptojects\\RedSun2\\Models\\Soldiers\\NG\\NG_Head_1_128.png
+
+newmtl MP38
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd Ptojects\\RedSun2\\Models\\Weapon\\MP38\\MP38_Texture_256.png
+
+newmtl MP_38_Magazine
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Ptojects\\RedSun2\\Models\\Weapon\\MP38\\MP38_Magazine_Texture.png
+
+newmtl NG_Bag
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl NG_Helmet
+Ns 382.060268
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd D:\\Blender Ptojects\\RedSun2\\Models\\Soldiers\\NG\\NG_Helmet_Texture.png
+
+newmtl Sight
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Ptojects\\RedSun2\\Models\\Weapon\\MP38\\MP38_Sight.png
+map_d Ptojects\\RedSun2\\Models\\Weapon\\MP38\\MP38_Sight.png
+
+newmtl Skin
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd D:\\Blender Ptojects\\RedSun2\\Models\\Soldiers\\NG\\NG_Skin_Texture_256.png
