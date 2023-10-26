@@ -7,19 +7,17 @@ import java.util.stream.Stream;
 
 public class ObjParser
 {
-    File file;
-    Scanner s;
-    public ObjParser(File file) {
-        this.file = file;
+    
+    public static ArrayList<Face> faces(File file)
+    {
+        Scanner s = null;
         try
         {
             s = new Scanner(file);
             s.useLocale(Locale.US);
         }
         catch(Throwable e) {System.out.println(e);}
-    }
-    public ArrayList<Face> faces()
-    {
+
         ArrayList<Vector3> points = new ArrayList<>();
         ArrayList<Vector2> uv = new ArrayList<>();
         ArrayList<Vector3> normals = new ArrayList<>();

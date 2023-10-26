@@ -8,9 +8,8 @@ public class Program
     {
         int sizeX = 500;
         int sizeY = 500;
-        ObjParser parser = new ObjParser(new File("Soldier.obj"));
-        ArrayList<Face> mesh = parser.faces();
-        Drawer drawer = new GLMeshDrawer(mesh, "Knight.png", sizeX, sizeY, new Matrix4());
+        ArrayList<Face> mesh = ObjParser.faces(new File("Knight.obj"));
+        Drawer drawer = new GLMeshDrawer(mesh, new GLTexture("Knight.png"), new Matrix4(), sizeX, sizeY);
         GLWindow window  = new GLWindow(sizeX, sizeY, drawer);
         window.run();
     }

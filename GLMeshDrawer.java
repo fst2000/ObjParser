@@ -14,13 +14,15 @@ public class GLMeshDrawer implements Drawer
     int sizeX;
     int sizeY;
     Matrix4 transform;
+    GLTexture texture;
     float angle;
-    public GLMeshDrawer(ArrayList<Face> faces, String texture, int sizeX, int sizeY, Matrix4 transform)
+    public GLMeshDrawer(ArrayList<Face> faces, GLTexture texture, Matrix4 transform, int sizeX, int sizeY)
     {
         this.faces = faces;
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.transform = transform;
+        this.texture = texture;
     }
     @Override
     public void draw()
@@ -29,9 +31,9 @@ public class GLMeshDrawer implements Drawer
         glDepthFunc(GL_LESS);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_TEXTURE_2D);
-
+        glBindTexture(GL_TEXTURE_2D, texture.getId());
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, texture.getWidth(), texture.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, texture.getBuffer());
         glViewport(0, 0, sizeX, sizeY);
-        
         glBegin(GL_TRIANGLES);
 
         transform.rotateY(angle);

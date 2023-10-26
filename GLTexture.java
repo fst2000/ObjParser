@@ -12,19 +12,21 @@ public class GLTexture
 {
     private ByteBuffer buffer;
     private int id;
-    public GLTexture(File imageFile)
+    private int width;
+    private int height;
+    public GLTexture(String localPath)
     {
-        id = glGenTextures();
+        id = glGenTextures(); // ERROR
         BufferedImage image;
         try {
-            image = ImageIO.read(imageFile);
+            image = ImageIO.read(Program.class.getResource(localPath));
         } catch (IOException e)
         {
             image = null;
             e.printStackTrace();
         }
-        int width = image.getWidth();
-        int height = image.getHeight();
+        width = image.getWidth();
+        height = image.getHeight();
 
         int[] pixels = new int[width * height];
         image.getRGB(0, 0, width, height, pixels, 0, width);
@@ -45,12 +47,20 @@ public class GLTexture
         }
         buffer.flip();
     }
-    int GetId()
+    int getId()
     {
         return id;
     }
-    ByteBuffer GetBuffer()
+    ByteBuffer getBuffer()
     {
         return buffer;
+    }
+    int getWidth()
+    {
+        return width;
+    }
+    int getHeight()
+    {
+        return height;
     }
 }
