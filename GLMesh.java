@@ -1,44 +1,18 @@
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
-
-import java.awt.image.BufferedImage;
-import java.awt.image.Raster;
-import java.io.File;
-
 import static org.lwjgl.opengl.GL11.*;
 
-public class GLMeshDrawer implements Drawer
+public class GLMesh
 {
-    ArrayList<Face> faces;
-    int sizeX;
-    int sizeY;
-    Matrix4 transform;
-    GLTexture texture;
-    float angle;
-    public GLMeshDrawer(ArrayList<Face> faces, GLTexture texture, Matrix4 transform, int sizeX, int sizeY)
-    {
-        this.faces = faces;
-        this.sizeX = sizeX;
-        this.sizeY = sizeY;
-        this.transform = transform;
-        this.texture = texture;
-    }
-    @Override
-    public void draw()
+
+    public static void drawMesh(ArrayList<Face> faces, int textureId, Matrix4 transform, int sizeX, int sizeY)
     {
         glCullFace(GL_NONE);
         glDepthFunc(GL_LESS);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_TEXTURE_2D);
-        glBindTexture(GL_TEXTURE_2D, texture.getId());
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, texture.getWidth(), texture.getHeight(), 0, GL_RGB, GL_UNSIGNED_BYTE, texture.getBuffer());
+        glBindTexture(GL_TEXTURE_2D, textureId);
         glViewport(0, 0, sizeX, sizeY);
         glBegin(GL_TRIANGLES);
-
-        transform.rotateY(angle);
-        angle += 0.5f;
-
         for (Face face : faces)
         {
             Vector3 p1 = face.vertices().get(0).position();

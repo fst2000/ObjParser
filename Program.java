@@ -9,8 +9,13 @@ public class Program
         int sizeX = 500;
         int sizeY = 500;
         ArrayList<Face> mesh = ObjParser.faces(new File("Knight.obj"));
-        Drawer drawer = new GLMeshDrawer(mesh, new GLTexture("Knight.png"), new Matrix4(), sizeX, sizeY);
-        GLWindow window  = new GLWindow(sizeX, sizeY, drawer);
-        window.run();
+        Matrix4 transform = new Matrix4();
+        GLWindow window  = new GLWindow(sizeX, sizeY);
+        window.init();
+        int id = GLTexture.loadTexture(GLTexture.loadImage("Knight.png"));
+        window.run(() ->
+        {
+            GLMesh.drawMesh(mesh, id, transform, sizeX, sizeY);
+        });
     }
 }

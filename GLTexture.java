@@ -10,13 +10,8 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class GLTexture
 {
-    private ByteBuffer buffer;
-    private int id;
-    private int width;
-    private int height;
-    public GLTexture(String localPath)
+    static BufferedImage loadImage(String localPath)
     {
-        id = glGenTextures(); // ERROR
         BufferedImage image;
         try {
             image = ImageIO.read(Program.class.getResource(localPath));
@@ -25,12 +20,16 @@ public class GLTexture
             image = null;
             e.printStackTrace();
         }
-        width = image.getWidth();
-        height = image.getHeight();
+        return image;
+    }
+    static int loadTexture(BufferedImage image)
+    {
+        int width = image.getWidth();
+        int height = image.getHeight();
 
         int[] pixels = new int[width * height];
         image.getRGB(0, 0, width, height, pixels, 0, width);
-        buffer = BufferUtils.createByteBuffer(width * height * 3);
+        ByteBuffer buffer = BufferUtils.createByteBuffer(width * height * 3);
         for(int y = 0; y < height; y++)
         {
             for(int x = 0; x < width; x++)
@@ -46,21 +45,9 @@ public class GLTexture
             }
         }
         buffer.flip();
-    }
-    int getId()
-    {
+        int id = glGenTextures();
+        glBindTexture(GL_TEXTURE_2D, id);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB8, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, buffer);
         return id;
-    }
-    ByteBuffer getBuffer()
-    {
-        return buffer;
-    }
-    int getWidth()
-    {
-        return width;
-    }
-    int getHeight()
-    {
-        return height;
     }
 }

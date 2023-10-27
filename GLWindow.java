@@ -23,19 +23,16 @@ public class GLWindow
 
 	// The window handle
 	private long window;
-    Drawer drawer;
     int sizeX;
     int sizeY;
-    public GLWindow(int sizeX, int sizeY, Drawer drawer)
+    public GLWindow(int sizeX, int sizeY)
     {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this.drawer = drawer;
     }
-	public void run()
+	public void run(Action updateAction)
     {
-		init();
-		loop();
+		loop(updateAction);
 
 		// Free the window callbacks and destroy the window
 		glfwFreeCallbacks(window);
@@ -46,7 +43,7 @@ public class GLWindow
 		glfwSetErrorCallback(null).free();
 	}
 
-	private void init()
+	void init()
     {
 		// Setup an error callback. The default implementation
 		// will print the error message in System.err.
@@ -100,7 +97,7 @@ public class GLWindow
 		glfwShowWindow(window);
 	}
 
-	private void loop()
+	private void loop(Action updateAction)
     {
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
@@ -117,7 +114,7 @@ public class GLWindow
 		while ( !glfwWindowShouldClose(window) ) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 			
-			drawer.draw();
+			updateAction.accept();
 
 			glfwSwapBuffers(window); // swap the color buffers
 
