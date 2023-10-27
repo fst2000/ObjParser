@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+
+import org.lwjgl.opengl.GL13;
+
 import static org.lwjgl.opengl.GL11.*;
 
 public class GLMesh
@@ -10,6 +13,7 @@ public class GLMesh
         glDepthFunc(GL_LESS);
         glEnable(GL_DEPTH_TEST);
         glEnable(GL_TEXTURE_2D);
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, textureId);
         glViewport(0, 0, sizeX, sizeY);
         glBegin(GL_TRIANGLES);

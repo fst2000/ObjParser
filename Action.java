@@ -1,4 +1,4 @@
 public interface Action
 {
-    void accept();    
+    void call();    
 }

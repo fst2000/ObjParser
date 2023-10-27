@@ -30,9 +30,10 @@ public class GLWindow
         this.sizeX = sizeX;
         this.sizeY = sizeY;
     }
-	public void run(Action updateAction)
+	public void run(Function<Action> startAction)
     {
-		loop(updateAction);
+		init();
+		loop(startAction);
 
 		// Free the window callbacks and destroy the window
 		glfwFreeCallbacks(window);
@@ -97,7 +98,7 @@ public class GLWindow
 		glfwShowWindow(window);
 	}
 
-	private void loop(Action updateAction)
+	private void loop(Function<Action> startAction)
     {
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
@@ -109,12 +110,14 @@ public class GLWindow
 		// Set the clear color
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
+		Action updateAction = startAction.call();
+
 		// Run the rendering loop until the user has attempted to close
 		// the window or has pressed the ESCAPE key.
 		while ( !glfwWindowShouldClose(window) ) {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 			
-			updateAction.accept();
+			updateAction.call();
 
 			glfwSwapBuffers(window); // swap the color buffers
 

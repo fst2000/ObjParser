@@ -11,11 +11,13 @@ public class Program
         ArrayList<Face> mesh = ObjParser.faces(new File("Knight.obj"));
         Matrix4 transform = new Matrix4();
         GLWindow window  = new GLWindow(sizeX, sizeY);
-        window.init();
-        int id = GLTexture.loadTexture(GLTexture.loadImage("Knight.png"));
         window.run(() ->
         {
-            GLMesh.drawMesh(mesh, id, transform, sizeX, sizeY);
+            int id = GLTexture.loadTexture(GLTexture.loadImage("Knight.png"));
+            return () ->
+            {
+                GLMesh.drawMesh(mesh, id, transform, sizeX, sizeY);
+            };
         });
     }
 }
